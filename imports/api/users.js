@@ -3,7 +3,7 @@ import SimpleSchema from 'simpl-schema';
 import {Accounts} from 'meteor/accounts-base';
 
 Accounts.validateNewUser((user) => {
-  try {
+
     const email = user.emails[0].address;
     new SimpleSchema({
       email: {
@@ -11,9 +11,7 @@ Accounts.validateNewUser((user) => {
         regEx: SimpleSchema.RegEx.Email
       }
     }).validate({ email });
-  } catch(e) {
-      throw new Meteor.Error(400, e.message);
-  }
+
 
   return true;
 })
