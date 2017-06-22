@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { WebApp } from 'meteor/webapp';
+import moment from 'moment';
 
 import './../imports/api/users';
 import {Links} from  './../imports/api/links';
@@ -23,16 +24,24 @@ Meteor.startup(() => {
   //   next();
   // });
 
+  let now = new Date();
+  // console.log(now);
+  //
+  // let momentNow = moment(now);
+  // console.log(momentNow.fromNow());
+  //
+
   WebApp.connectHandlers.use((req, res, next) => {
     const _id = req.url.slice(1); // remove the /(splash)
     const link = Links.findOne({ _id });
 
     if(link) {
       res.statusCode = 302;
-      console.log(link.url);
+      //console.log(link.url);
       res.setHeader('Location', link.url);
-
       res.end();
+      // To Track the last visit
+      Meteor.call('links.trackVisit',_id);
     } else {
       next();
     }
