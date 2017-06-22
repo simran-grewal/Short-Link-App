@@ -2,7 +2,7 @@ import React from 'react';
 import Clipboard from 'clipboard';
 import moment from 'moment';
 import {Meteor} from 'meteor/meteor';
-
+import FlipMove from 'react-flip-move';
 
 export default class LinksListItem extends React.Component {
   constructor (props) {
@@ -47,6 +47,8 @@ export default class LinksListItem extends React.Component {
   render () {
 
     return (
+
+
       <div className = "item">
         <h2>{this.props.url}</h2>
         <p className = "item__message">{this.props.shortUrl}</p>
@@ -62,6 +64,8 @@ export default class LinksListItem extends React.Component {
           {this.props.visible? 'Hide': 'Unhide'}
         </button>
       </div>
+
+
     )
   }
 }
